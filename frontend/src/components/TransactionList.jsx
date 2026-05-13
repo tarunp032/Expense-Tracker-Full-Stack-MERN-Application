@@ -30,6 +30,7 @@ function TransactionList({
   return (
     <div className="transaction-list">
       <h2>Transaction History</h2>
+      <div className="table-container">
       <table>
         <thead>
           <tr>
@@ -68,6 +69,7 @@ function TransactionList({
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

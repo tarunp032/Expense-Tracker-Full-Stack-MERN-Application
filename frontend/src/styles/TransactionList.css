@@ -1,11 +1,17 @@
 .transaction-list {
   background: white;
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 28px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
   border: 2px solid rgba(124, 58, 237, 0.1);
-  overflow: hidden;
   transition: all 0.3s ease;
+   flex: 1;
+  max-width: 700px; 
+
+  /* 🔥 IMPORTANT */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .transaction-list:hover {
@@ -13,15 +19,15 @@
 }
 
 .transaction-list h2 {
-  margin-bottom: 2.5rem;
-  color: #0f172a;
-  font-size: 1.9rem;
+  margin-bottom: 1.5rem;
+  color: transparent; 
+  font-size: 1.8rem;
   font-weight: 900;
   letter-spacing: -0.7px;
   background: linear-gradient(135deg, #0a0e27, #533483);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .no-transactions {
@@ -32,124 +38,113 @@
   font-weight: 600;
 }
 
+
+
+/* 🔥 Scroll container */
+.table-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 16px;
+}
+
+/* Scrollbar */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-radius: 10px;
+}
+
+/* Table */
 table {
   width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
 }
 
-table thead {
-  background: linear-gradient(135deg, #f0f4f8 0%, #e8ecf1 100%);
-  border-bottom: 3px solid rgba(124, 58, 237, 0.2);
+/* Sticky Header */
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f8fafc;
 }
 
-table th {
-  padding: 1.5rem;
+/* Header */
+th {
+  padding: 1rem;
   text-align: left;
+  font-size: 0.75rem;
   font-weight: 800;
-  color: #1f2937;
-  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  background: linear-gradient(
-    90deg,
-    rgba(251, 191, 36, 0.05),
-    rgba(124, 58, 237, 0.05)
-  );
+  letter-spacing: 1px;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
 }
 
-table td {
-  padding: 1.5rem;
-  border-bottom: 2px solid #f3f4f6;
-  color: #1f2937;
+/* Cells */
+td {
+  padding: 1.2rem;
+  border-bottom: 1px solid #f1f5f9;
   font-weight: 600;
+  color: #1f2937;
 }
 
-table tbody tr {
-  transition: all 0.4s ease;
+/* Hover */
+tbody tr:hover {
+  background: rgba(124, 58, 237, 0.05);
 }
 
-table tbody tr:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(251, 191, 36, 0.08),
-    rgba(124, 58, 237, 0.08)
-  );
-  box-shadow: inset 0 0 0 2px rgba(124, 58, 237, 0.15);
-  transform: scale(1.01);
-}
-
+/* Badge */
 .badge {
   display: inline-block;
-  padding: 0.65rem 1.3rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .badge.income {
-  background: linear-gradient(
-    135deg,
-    rgba(16, 185, 129, 0.15),
-    rgba(5, 150, 105, 0.1)
-  );
-  color: #047857;
-  border: 2px solid rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
 }
 
 .badge.expense {
-  background: linear-gradient(
-    135deg,
-    rgba(239, 68, 68, 0.15),
-    rgba(220, 38, 38, 0.1)
-  );
-  color: #b91c1c;
-  border: 2px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
 }
 
-table td.income {
+/* Amount */
+td.income {
   color: #059669;
   font-weight: 800;
-  background: linear-gradient(90deg, rgba(16, 185, 129, 0.05), transparent);
-  border-radius: 8px;
-  padding: 1.5rem;
 }
 
-table td.expense {
+td.expense {
   color: #dc2626;
   font-weight: 800;
-  background: linear-gradient(90deg, rgba(239, 68, 68, 0.05), transparent);
-  border-radius: 8px;
-  padding: 1.5rem;
 }
 
+/* Delete button */
 .btn-delete {
   background: linear-gradient(135deg, #ef4444, #dc2626);
   color: white;
   border: none;
-  padding: 0.7rem 1.4rem;
-  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-  font-weight: 700;
-  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: 0.2s;
 }
 
 .btn-delete:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.4);
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
 }
 
-.btn-delete:active {
-  transform: translateY(-1px);
-}
-
+/* Responsive */
 @media (max-width: 768px) {
   .transaction-list {
     padding: 1.5rem;
@@ -159,8 +154,8 @@ table td.expense {
     font-size: 0.9em;
   }
 
-  table th,
-  table td {
+  th,
+  td {
     padding: 0.8rem;
   }
 }
