@@ -24,13 +24,15 @@ const sendOTPEmail = async (email, otp) => {
           ${otp}
         </h1>
         <p>This OTP will expire in 10 minutes.</p>
-        <p>If you didn't request this, please ignore this email.</p>
       `,
     });
 
-    console.log("✅ Email sent:", response);
+    console.log("Email sent:", response);
+
+    return response; // 🔥 IMPORTANT
   } catch (error) {
-    console.error("❌ Error sending email:", error);
+    console.error("Error sending email:", error);
+    return false;
   }
 };
 
@@ -147,9 +149,7 @@ exports.login = async (req, res) => {
     // Send OTP email
     const emailSent = await sendOTPEmail(user.email, otp);
 
-    if (!emailSent) {
-      return res.status(500).json({ message: "Failed to send OTP email" });
-    }
+    await sendOTPEmail(user.email, otp);
 
     return res.status(200).json({
       message: "OTP sent to your email. Please verify to login.",

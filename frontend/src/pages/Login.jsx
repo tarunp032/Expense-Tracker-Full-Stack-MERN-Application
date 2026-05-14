@@ -29,9 +29,11 @@ const Login = () => {
     try {
       const response = await loginUser(formData);
 
-      console.log("Login response:", response.data);
+      console.log("Login response:", response?.data);
 
-      const { userId, email, message } = response.data;
+      const userId = response?.data?.userId;
+      const email = response?.data?.email;
+      const message = response?.data?.message;
 
       if (userId && email) {
         navigate("/verify-otp", {
@@ -44,8 +46,8 @@ const Login = () => {
       console.error("Login error:", err);
 
       setError(
-        err.response?.data?.message ||
-        "Login failed. Please check credentials."
+        err?.response?.data?.message ||
+          "Login failed. Please check credentials.",
       );
     } finally {
       setLoading(false);
