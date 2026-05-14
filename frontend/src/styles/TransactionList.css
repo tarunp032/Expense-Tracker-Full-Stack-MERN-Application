@@ -5,8 +5,8 @@
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
   border: 2px solid rgba(124, 58, 237, 0.1);
   transition: all 0.3s ease;
-   flex: 1;
-  max-width: 700px; 
+  flex: 1;
+  max-width: 700px;
 
   /* 🔥 IMPORTANT */
   height: 100%;
@@ -20,7 +20,7 @@
 
 .transaction-list h2 {
   margin-bottom: 1.5rem;
-  color: transparent; 
+  color: transparent;
   font-size: 1.8rem;
   font-weight: 900;
   letter-spacing: -0.7px;
@@ -37,8 +37,6 @@
   font-size: 1.15rem;
   font-weight: 600;
 }
-
-
 
 /* 🔥 Scroll container */
 .table-container {
@@ -144,18 +142,164 @@ td.expense {
   transform: translateY(-2px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 374px) {
   .transaction-list {
-    padding: 1.5rem;
+    padding: 1rem;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .transaction-list h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .no-transactions {
+    padding: 2rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .table-container {
+    border-radius: 12px;
   }
 
   table {
+    min-width: 280px;
+    font-size: 0.8em;
+  }
+
+  th,
+  td {
+    padding: 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .badge {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.65rem;
+  }
+
+  .btn-delete {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 480px) {
+  .transaction-list {
+    padding: 1.25rem;
+    border-radius: 18px;
+  }
+
+  .transaction-list h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .no-transactions {
+    padding: 3rem 1rem;
+    font-size: 1rem;
+  }
+
+  .table-container {
+    border-radius: 14px;
+  }
+
+  table {
+    min-width: 320px;
+    font-size: 0.85em;
+  }
+
+  th,
+  td {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .btn-delete {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .transaction-list {
+    padding: 1.5rem;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  .transaction-list h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .no-transactions {
+    padding: 4rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  table {
+    min-width: 100%;
     font-size: 0.9em;
   }
 
   th,
   td {
-    padding: 0.8rem;
+    padding: 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .badge {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-delete {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .transaction-list {
+    padding: 1.75rem;
+    max-width: 100%;
+  }
+
+  .transaction-list h2 {
+    font-size: 1.7rem;
+  }
+
+  table {
+    min-width: 100%;
+    font-size: 0.92em;
+  }
+
+  th,
+  td {
+    padding: 0.95rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .transaction-list {
+    padding: 2rem;
+    max-width: 700px;
+  }
+
+  table {
+    min-width: 900px;
+    font-size: 1em;
+  }
+
+  th,
+  td {
+    padding: 1.2rem;
   }
 }

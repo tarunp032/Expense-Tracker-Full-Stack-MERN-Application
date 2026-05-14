@@ -7,15 +7,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout, isAuthenticated } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate("/login");
+    setShowMobileMenu(false);
   };
 
   const handleProfile = () => {
     navigate("/profile");
     setShowDropdown(false);
+    setShowMobileMenu(false);
   };
 
   return (
@@ -27,9 +30,30 @@ const Navbar = () => {
           <span className="logo-text">FinTrack Pro</span>
         </div>
 
+        {/* Hamburger Menu Button */}
+        {isAuthenticated && user && (
+          <button
+            className="hamburger-btn"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            aria-label="Toggle menu"
+          >
+            <span
+              className={`hamburger-line ${showMobileMenu ? "active" : ""}`}
+            ></span>
+            <span
+              className={`hamburger-line ${showMobileMenu ? "active" : ""}`}
+            ></span>
+            <span
+              className={`hamburger-line ${showMobileMenu ? "active" : ""}`}
+            ></span>
+          </button>
+        )}
+
         {/* Right Section */}
         {isAuthenticated && user && (
-          <div className="navbar-right">
+          <div
+            className={`navbar-right ${showMobileMenu ? "mobile-open" : ""}`}
+          >
             <div className="navbar-divider"></div>
 
             <div className="user-info">

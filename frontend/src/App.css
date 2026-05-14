@@ -113,14 +113,42 @@ textarea {
 }
 
 /* Responsive design */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
+@media (max-width: 374px) {
+  .loading::after {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
   }
 }
 
-@media (max-width: 480px) {
-  body {
-    font-size: 13px;
+@media (min-width: 375px) and (max-width: 480px) {
+  .loading::after {
+    width: 45px;
+    height: 45px;
+    border-width: 4px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .loading::after {
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .loading::after {
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .loading::after {
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
   }
 }

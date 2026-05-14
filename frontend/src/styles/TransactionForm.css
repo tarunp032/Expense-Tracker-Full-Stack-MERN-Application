@@ -99,7 +99,11 @@
 }
 
 .error-message {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.12),
+    rgba(220, 38, 38, 0.08)
+  );
   color: #b91c1c;
   padding: 1.2rem;
   border-radius: 12px;
@@ -110,7 +114,11 @@
 }
 
 .success-message {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.12),
+    rgba(5, 150, 105, 0.08)
+  );
   color: #065f46;
   padding: 1.2rem;
   border-radius: 12px;
@@ -121,9 +129,16 @@
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
 }
 
 @keyframes slideIn {
@@ -137,22 +152,157 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 374px) {
   .transaction-form {
-    padding: 1.5rem;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .transaction-form h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
   }
 
   .transaction-form button {
     width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    margin-top: 1.25rem;
+    border-radius: 10px;
   }
 
-  .error-message {
-    color: #dc2626;
+  .error-message,
+  .success-message {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 480px) {
+  .transaction-form {
     padding: 1.25rem;
-    border-radius: 12px;
+    border-radius: 18px;
+  }
+
+  .transaction-form h2 {
+    font-size: 1.5rem;
     margin-bottom: 1.75rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.95rem 1.1rem;
     font-size: 0.95rem;
-    border-left: 4px solid #dc2626;
-    font-weight: 500;
+    border-radius: 12px;
+  }
+
+  .transaction-form button {
+    width: 100%;
+    padding: 1.1rem 1.8rem;
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .error-message,
+  .success-message {
+    padding: 1.1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .transaction-form {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .transaction-form h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.75rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 1rem 1.2rem;
+    font-size: 0.98rem;
+  }
+
+  .transaction-form button {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    font-size: 0.98rem;
+    margin-top: 1.75rem;
+  }
+
+  .error-message,
+  .success-message {
+    padding: 1.2rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.92rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .transaction-form {
+    padding: 2rem;
+  }
+
+  .transaction-form h2 {
+    font-size: 1.7rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
+  .transaction-form button {
+    width: 100%;
+    padding: 1.2rem 2.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .transaction-form {
+    padding: 3rem;
+  }
+
+  .transaction-form button {
+    width: auto;
+    padding: 1.3rem 3rem;
   }
 }
