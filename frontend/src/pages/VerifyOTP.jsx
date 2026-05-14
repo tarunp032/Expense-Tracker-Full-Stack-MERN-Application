@@ -19,9 +19,9 @@ const VerifyOTP = () => {
   useEffect(() => {
     if (!userId || !email) {
       navigate("/login");
+      return;
     }
 
-    // Timer for OTP expiration
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -66,11 +66,19 @@ const VerifyOTP = () => {
         otp,
       });
 
-      if (response.data.token && response.data.user) {
-        login(response.data.user, response.data.token);
+      console.log("OTP response:", response.data);
+
+      const { token, user, message } = response.data;
+
+      if (token && user) {
+        login(user, token);
         navigate("/dashboard");
+      } else {
+        setError(message || "Invalid OTP");
       }
     } catch (err) {
+      console.error("OTP error:", err);
+
       setError(
         err.response?.data?.message ||
           "OTP verification failed. Please try again.",

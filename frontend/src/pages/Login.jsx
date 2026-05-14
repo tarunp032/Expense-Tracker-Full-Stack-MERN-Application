@@ -28,15 +28,24 @@ const Login = () => {
 
     try {
       const response = await loginUser(formData);
-      if (response.data.userId) {
-        // Navigate to OTP verification
+
+      console.log("Login response:", response.data);
+
+      const { userId, email, message } = response.data;
+
+      if (userId && email) {
         navigate("/verify-otp", {
-          state: { userId: response.data.userId, email: response.data.email },
+          state: { userId, email },
         });
+      } else {
+        setError(message || "Login failed. No user found.");
       }
     } catch (err) {
+      console.error("Login error:", err);
+
       setError(
-        err.response?.data?.message || "Login failed. Please try again.",
+        err.response?.data?.message ||
+        "Login failed. Please check credentials."
       );
     } finally {
       setLoading(false);
