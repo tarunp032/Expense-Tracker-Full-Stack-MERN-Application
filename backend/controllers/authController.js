@@ -1,16 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 const User = require("../models/User");
 
-// Configure email service
-const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE || "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Generate OTP
 const generateOTP = () => {
@@ -20,31 +13,24 @@ const generateOTP = () => {
 // Send OTP email
 const sendOTPEmail = async (email, otp) => {
   try {
-    // Create transporter INSIDE function, not at module level
-    const transporter = nodemailer.createTransport({
-      service: process.env.EMAIL_SERVICE || "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    const response = await resend.emails.send({
+      from: process.env.RESEND_FROM_EMAIL,
       to: email,
       subject: "FinTrack Pro - Your OTP for Login",
       html: `
         <h2>Welcome to FinTrack Pro</h2>
         <p>Your OTP for login is:</p>
-        <h1 style="color: #007bff; font-size: 32px; letter-spacing: 5px;">${otp}</h1>
+        <h1 style="color: #007bff; font-size: 32px; letter-spacing: 5px;">
+          ${otp}
+        </h1>
         <p>This OTP will expire in 10 minutes.</p>
         <p>If you didn't request this, please ignore this email.</p>
       `,
     });
-    return true;
+
+    console.log("✅ Email sent:", response);
   } catch (error) {
-    console.error("Error sending email:", error);
-    return false;
+    console.error("❌ Error sending email:", error);
   }
 };
 
@@ -238,12 +224,10 @@ exports.verifyOTP = async (req, res) => {
     });
   } catch (error) {
     console.error("OTP verification error:", error);
-    return res
-      .status(500)
-      .json({
-        message: "Server error during OTP verification",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "Server error during OTP verification",
+      error: error.message,
+    });
   }
 };
 
@@ -273,7 +257,15 @@ exports.getProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const { fullName, phoneNumber, dateOfBirth, gender, profession, address, profileImage } = req.body;
+    const {
+      fullName,
+      phoneNumber,
+      dateOfBirth,
+      gender,
+      profession,
+      address,
+      profileImage,
+    } = req.body;
 
     // Step 1: Pehle existing user fetch karo
     const existingUser = await User.findById(userId);
@@ -293,7 +285,7 @@ exports.updateProfile = async (req, res) => {
         address: address || existingUser.address,
         profileImage: profileImage || existingUser.profileImage,
       },
-      { new: true }
+      { new: true },
     ).select("-password -otp");
 
     return res.status(200).json({
@@ -302,7 +294,9 @@ exports.updateProfile = async (req, res) => {
     });
   } catch (error) {
     console.error("Update profile error:", error);
-    return res.status(500).json({ message: "Server error updating profile", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error updating profile", error: error.message });
   }
 };
 
